@@ -5,3 +5,9 @@
 #2 If you want to remove working directory changes as well and go back to previous commit changes:
 - git restore --staged <filename>
 - gi restore <filename>
+
+#3 After commit: 
+- Undo the last commit but keep changes in staging : git reset --soft HEAD~1
+- Undo the last commit and unstage changes (but keep in working directory) : git reset HEAD~1
+- Undo commit and delete the changes completely: git reset --hard HEAD~1
+
