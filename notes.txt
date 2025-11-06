@@ -3,4 +3,5 @@
 - git restore --staged . or git restore --stage <filename>
 
 #2 If you want to remove working directory changes as well and go back to previous commit changes:
+- git restore --staged <filename>
 - gi restore <filename>
