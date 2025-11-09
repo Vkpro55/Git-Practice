@@ -29,6 +29,16 @@
 - first create empty repository and download all the lestest version of source code files
 - it links the local repo to remote repo using refernce pointer so that any push and pull operations are performed rightly
 
+#9: Three ways:
+- git pull --rebase
+- git pull --ff
+- git pull --ff-only -> not create any merge or rebase if divergence is there it stop and let you handle that
+
+#10: To see how commits is actually created by using refernce of last commit
+- git log --all --graph --decorate --oneline
+
+
+#11:
 --force rewrites the remote branch’s history to match your local history.
 | Command                       | Meaning                                                           |
 | ----------------------------- | ----------------------------------------------------------------- |
