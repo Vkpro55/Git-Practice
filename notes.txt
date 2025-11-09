@@ -11,3 +11,66 @@
 - Undo the last commit and unstage changes (but keep in working directory) : git reset HEAD~1
 - Undo commit and delete the changes completely: git reset --hard HEAD~1
 
+#4: If you want to go previous commit but also at the same time on that branch others developers also work/dependent then do this that will not break your code:
+- git revert <commit_hash>
+  A — B — C — D   <-- pushed to GitHub
+  A — B — C — D — D'   (D' is "revert commit")
+
+#5: Undo last pushed commit but keep changes locally
+- git reset --soft HEAD~1
+
+#6: Undo last pushed commit and delete changes
+- git reset --hard HEAD~1
+
+--force rewrites the remote branch’s history to match your local history.
+| Command                       | Meaning                                                           |
+| ----------------------------- | ----------------------------------------------------------------- |
+| `git fetch`                   | Download updates from remote, **but don’t merge** into your code  |
+| `git fetch origin branchname` | Fetch updates of a specific branch only                           |
+| `git merge branchname`        | Merge another branch **into your current branch**                 |
+| `git pull`                    | `fetch + merge` (auto merge)                                      |
+| `git pull origin branchname`  | Fetch and merge a specific remote branch into your current branch |
+
+
+Q1:
+Your team follows a feature-branch workflow. A developer force-pushed to main by mistake and rewrote history.
+How would you detect what changed and recover main without losing any valid commits that happened after?
+- “If someone accidentally force-pushes to main and rewrites history, the first step is to identify what was overwritten. I would check git reflog or GitHub’s branch history to locate the missing commits. Once I have the commit hash, I avoid another force push — instead, I create a recovery branch or directly merge the lost commit back into main to restore history safely.
+
+After recovery, I’d enable branch protection rules on main to prevent force pushes in the future and enforce PR-based merges to avoid similar incidents.”
+
+- git reflog
+- a1b2c3d main@{1}: commit: #2
+- git checkout -b recover-main a1b2c3d
+- git checkout main
+- git merge a1b2c3d
+- git push
+
+
+Q2:
+Your team is working on a large project with 10+ developers contributing daily. You notice frequent merge conflicts and long-running feature branches causing integration issues.
+How would you redesign the branching strategy to reduce conflicts, improve collaboration, and ensure faster, safer releases?
+- Short-lived Feature Branch + Daily Rebase
+- git pull --rebase origin main
+
+Q3: Credentials Accidentally Committed — What to Do? (Short Answer)
+
+“If secrets are pushed, removing them in a new commit isn’t enough. I would rewrite Git history (using git filter-repo or BFG) to fully remove the secret, then force-push the cleaned history. I would rotate the exposed keys immediately and ask teammates to sync using git fetch --all and git reset --hard origin/main. Finally, I’d enable secret scanning and use environment variables so this doesn’t happen again.”
+
+
+Q4 (Senior Level):
+Your repository has grown very large over time (e.g., >3 GB) because developers kept committing binaries, images, and build artifacts. Cloning and pulling has become slow for the entire team.
+How would you reduce the repo size, clean the history to remove large files, and prevent this from happening again — without breaking everyone’s workflow?
+- “I’d remove large files with git-filter-repo/BFG, move binaries to LFS or cloud storage, rewrite history once, and enforce pre-commit, CI, and GitHub rules so repo remains lightweight.”
+
+Q6 (Senior Level):
+Your team works with Open Source and uses GitHub. You want to ensure code quality, security, and accountability before merging PRs, but without slowing down developers too much.
+What GitHub features and workflow rules would you configure to balance speed and safety in the PR process?
+- Enable Branch Protection Rules
+  No direct push to main
+  Require PR, approvals, & all checks to pass
+- Controls for Speed
+  Enable auto-merge if all checks pass
+
+- CI Checks on PR
+  Linting + Unit Tests
