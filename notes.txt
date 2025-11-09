@@ -22,6 +22,13 @@
 #6: Undo last pushed commit and delete changes
 - git reset --hard HEAD~1
 
+#7: To find the common ancestor or To check from what point the new branch is deviate/create from
+- git merge-base master middleware
+
+#8: Clone behind the scene
+- first create empty repository and download all the lestest version of source code files
+- it links the local repo to remote repo using refernce pointer so that any push and pull operations are performed rightly
+
 --force rewrites the remote branch’s history to match your local history.
 | Command                       | Meaning                                                           |
 | ----------------------------- | ----------------------------------------------------------------- |
