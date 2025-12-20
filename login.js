@@ -1,3 +1,4 @@
 console.log("Start login page");
 
-console.log("Middle way of development");
+
+console.log("Let's make login page beatifull")
