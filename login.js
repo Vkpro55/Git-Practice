@@ -1,1 +1,1 @@
-console.log("Start login page");
+console.log("Start merge with merge conflicts");
