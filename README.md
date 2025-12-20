@@ -1,8 +1,8 @@
 Conflict/Cause
 
 To build the login page please use this architecture:
-- username
+- name
 - password
 - Next Oauth
 - do it
-- hi
+- By
