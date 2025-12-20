@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 Start the Conlict
+=======
+Conflict/Cause
+I want coflict
+>>>>>>> 58f743d (rebase)
 
 
 To build the login page please use this architecture:
